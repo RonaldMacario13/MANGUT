@@ -25,20 +25,15 @@ public class BrigadeiroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _brigadeiroDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        if (_brigadeiroDirection.sqrMagnitude > 0)
-        {
-            _brigadeiroAnimator.SetBool("isMoving", true);
-        } else {
-            _brigadeiroAnimator.SetBool("isMoving", false);
-        }
+        
     }
 
     private void FixedUpdate() 
     {
         if (_detectionArea.detectedObjs.Count > 0)
         {
+            _brigadeiroAnimator.SetBool("isMoving", true);
+
             _brigadeiroDirection = (_detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
 
             _brigadeiroRB2D.MovePosition(_brigadeiroRB2D.position + _brigadeiroDirection * _moveSpeedBrigadeiro * Time.fixedDeltaTime);
@@ -51,6 +46,9 @@ public class BrigadeiroController : MonoBehaviour
             {
                 _spritRenderer.flipX = true;
             }
+        } else if (_detectionArea.detectedObjs.Count == 0)
+        {
+            _brigadeiroAnimator.SetBool("isMoving", false);
         }
     }
 }
