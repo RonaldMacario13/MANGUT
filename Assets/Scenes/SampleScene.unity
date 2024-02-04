@@ -2543,6 +2543,8 @@ GameObject:
   - component: {fileID: 574172377}
   - component: {fileID: 574172376}
   - component: {fileID: 574172379}
+  - component: {fileID: 574172381}
+  - component: {fileID: 574172380}
   m_Layer: 0
   m_Name: Beijinho
   m_TagString: Untagged
@@ -2666,6 +2668,55 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &574172380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574172375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26899656c8036cf4cbc4bf2282d0cd20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeedBeijinho: 3.5
+  _detectionArea: {fileID: 654495281}
+--- !u!70 &574172381
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574172375}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000023841858, y: -0.134022}
+  m_Size: {x: 0.92782545, y: 0.92782545}
+  m_Direction: 0
 --- !u!1 &630593578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,6 +2913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 654495279}
   - component: {fileID: 654495280}
+  - component: {fileID: 654495281}
   m_Layer: 0
   m_Name: AreaDetection
   m_TagString: Untagged
@@ -2919,6 +2971,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!114 &654495281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654495278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef36428a01a4794d97b9079dfebbb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tagTargetDetection: Player
+  detectedObjs: []
 --- !u!1 &725658457
 GameObject:
   m_ObjectHideFlags: 0
