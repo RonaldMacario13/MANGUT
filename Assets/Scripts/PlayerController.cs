@@ -115,4 +115,20 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnAttack()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _isAttacking = true;
+            _playerSpeed = 0;
+        }
+
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            _isAttacking = false;
+            _playerSpeed = _playerInitialSpeed;
+        }
+    }
+
 }
