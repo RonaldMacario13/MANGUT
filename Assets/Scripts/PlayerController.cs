@@ -56,6 +56,12 @@ public class PlayerController : MonoBehaviour
         _playerRigidbody2D.MovePosition(_playerRigidbody2D.position + _playerDirection.normalized * _playerSpeed * Time.fixedDeltaTime);
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Enemy") {
+            PlayerTakeDamage(1.0f);
+        }
+    }
+
     void PlayerRun()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
