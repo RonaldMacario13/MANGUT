@@ -38,6 +38,17 @@ public class PlayerController : MonoBehaviour
         _playerDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         PlayerRun();
+
+        OnAttack();
+
+        if(_isAttacking){
+            _playerAnimator.SetInteger("Movimento", 2);
+        } else {
+            _playerAnimator.SetInteger("Movimento", 0);
+        }
+
+        // _playerInitialLives = Mathf.Clamp(_playerInitialLives, 0, 3);
+        Debug.Log(_playerCurrentLives);
     }
 
     void FixedUpdate() 
