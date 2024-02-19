@@ -75,4 +75,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void PlayerTakeDamage(float damage)
+    {
+        _playerCurrentLives -= damage;
+
+        if (_playerCurrentLives == 2.0f)
+        {
+            vidaOn2.enabled = true;
+            vidaOff2.enabled = false;
+        } else {
+            vidaOn2.enabled = false;
+            vidaOff2.enabled = true;
+        }
+
+        if (_playerCurrentLives == 1.0f)
+        {
+            vidaOn2.enabled = true;
+            vidaOff2.enabled = false;
+
+            vidaOn.enabled = true;
+            vidaOff.enabled = false;
+        } else {
+            vidaOn.enabled = false;
+            vidaOff.enabled = true;
+        }
+
+        if (_playerCurrentLives <= 0)
+        {
+            _isPlayerDead = true;
+            Debug.Log("O jogador morreu!");
+            Dead();
+        }
+    }
 }
