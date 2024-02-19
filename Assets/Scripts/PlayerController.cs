@@ -107,4 +107,12 @@ public class PlayerController : MonoBehaviour
             Dead();
         }
     }
+
+    void Dead() {
+        if (_isPlayerDead)
+        {
+            Debug.Log("O jogador morreu!");
+            Destroy(gameObject);
+        }
+    }
 }
