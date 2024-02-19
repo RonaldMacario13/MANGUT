@@ -11,12 +11,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _playerRunSpeed;
     private Vector2 _playerDirection;
+    [SerializeField]
+    private Animator _playerAnimator;
+    private float _playerInitialLives = 3;
+    private float _playerCurrentLives;
+    private bool _isPlayerDead = false;
+    private bool _isAttacking = false;
+
+
+    [SerializeField] Image vidaOn;
+    [SerializeField] Image vidaOn2;
+    [SerializeField] Image vidaOff;
+    [SerializeField] Image vidaOff2;
 
     void Start() 
     {
         _playerRigidbody2D = GetComponent<Rigidbody2D>();
 
         _playerInitialSpeed = _playerSpeed;
+
+        _playerCurrentLives = _playerInitialLives;
     }
 
     void Update() 
