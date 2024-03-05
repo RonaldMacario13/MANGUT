@@ -14,6 +14,8 @@ public class BrigadeiroController : MonoBehaviour
 
     private SpriteRenderer _spritRenderer;
 
+    public float health = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,5 +52,23 @@ public class BrigadeiroController : MonoBehaviour
         {
             _brigadeiroAnimator.SetBool("isMoving", false);
         }
+    }
+
+    public float Health {
+        set {
+            health = value;
+            if (health <= 0)
+            {
+                Defeated();
+            }        
+        }
+        get {
+            return health;
+        }
+
+    }
+
+    public void Defeated(){
+        Destroy(gameObject);
     }
 }

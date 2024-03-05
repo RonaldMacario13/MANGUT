@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public SwordAttack swordAttack;
 
     private Rigidbody2D _playerRigidbody2D;
     [SerializeField]
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
         _playerInitialSpeed = _playerSpeed;
 
         _playerCurrentLives = _playerInitialLives;
+
+        _playerAnimator = GetComponent<Animator>();
     }
 
     void Update() 
@@ -41,19 +45,37 @@ public class PlayerController : MonoBehaviour
 
         OnAttack();
 
-        if(_isAttacking){
-            _playerAnimator.SetInteger("Movimento", 2);
+
+
+        if (_playerDirection.sqrMagnitude > 0)
+        {
+            _playerAnimator.SetBool("isMoving", true);
         } else {
-            _playerAnimator.SetInteger("Movimento", 0);
+            _playerAnimator.SetBool("isMoving", false);
         }
 
+        if(_isAttacking){
+            _playerAnimator.SetTrigger("attack");
+        }
+        //  else {
+        //     _playerAnimator.SetInteger("Movimento", 0);
+        // }
+
+        Flip();
         // _playerInitialLives = Mathf.Clamp(_playerInitialLives, 0, 3);
-        Debug.Log(_playerCurrentLives);
+        // Debug.Log(_playerCurrentLives);
     }
 
     void FixedUpdate() 
-    {
+    {   
+        // if (_playerDirection != Vector2.zero)
+        // {
+        //     _playerAnimator.SetBool("isMoving", true);
+        // }
+        if (!_isPlayerDead)
+        { 
         _playerRigidbody2D.MovePosition(_playerRigidbody2D.position + _playerDirection.normalized * _playerSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -64,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     void PlayerRun()
     {
+        // Debug.Log("Entrou na parada de correr");
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             _playerSpeed = _playerRunSpeed;
@@ -103,7 +126,7 @@ public class PlayerController : MonoBehaviour
         if (_playerCurrentLives <= 0)
         {
             _isPlayerDead = true;
-            Debug.Log("O jogador morreu!");
+            // Debug.Log("O jogador morreu!");
             Dead();
         }
     }
@@ -111,8 +134,8 @@ public class PlayerController : MonoBehaviour
     void Dead() {
         if (_isPlayerDead)
         {
-            Debug.Log("O jogador morreu!");
-            Destroy(gameObject);
+            // Debug.Log("O jogador morreu!");
+            _playerAnimator.SetTrigger("isDead");
         }
     }
 
@@ -129,6 +152,23 @@ public class PlayerController : MonoBehaviour
             _isAttacking = false;
             _playerSpeed = _playerInitialSpeed;
         }
+
+        if (_playerDirection.x > 0)
+        {
+            swordAttack.AttackRight();
+        } else if(_playerDirection.x < 0)
+        {
+            swordAttack.AttackLeft();
+        }
     }
 
+    void Flip() {
+        if (_playerDirection.x > 0)
+        {
+            transform.eulerAngles = new Vector2(0f, 0f);
+        } else if(_playerDirection.x < 0)
+        {
+            transform.eulerAngles = new Vector2(0f, 180f);
+        }
+    }
 }
