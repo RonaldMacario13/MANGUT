@@ -6,15 +6,16 @@ public class BrigadeiroController : MonoBehaviour
 {
 
     public float _moveSpeedBrigadeiro = 3.5f;
+        private bool isDead = false;
     private Vector2 _brigadeiroDirection;
     private Rigidbody2D _brigadeiroRB2D;
     private Animator _brigadeiroAnimator;
 
+    public float health = 1;
+
     public DetectionController _detectionArea;
 
     private SpriteRenderer _spritRenderer;
-
-    public float health = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -32,25 +33,28 @@ public class BrigadeiroController : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if (_detectionArea.detectedObjs.Count > 0)
+        if (!isDead)
         {
-            _brigadeiroAnimator.SetBool("isMoving", true);
-
-            _brigadeiroDirection = (_detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
-
-            _brigadeiroRB2D.MovePosition(_brigadeiroRB2D.position + _brigadeiroDirection * _moveSpeedBrigadeiro * Time.fixedDeltaTime);
-
-            if (_brigadeiroDirection.x > 0)
+            if (_detectionArea.detectedObjs.Count > 0)
             {
-                _spritRenderer.flipX = false;
-            }
-            else if (_brigadeiroDirection.x < 0)
+                _brigadeiroAnimator.SetBool("isMoving", true);
+
+                _brigadeiroDirection = (_detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
+
+                _brigadeiroRB2D.MovePosition(_brigadeiroRB2D.position + _brigadeiroDirection * _moveSpeedBrigadeiro * Time.fixedDeltaTime);
+
+                if (_brigadeiroDirection.x > 0)
+                {
+                    _spritRenderer.flipX = false;
+                }
+                else if (_brigadeiroDirection.x < 0)
+                {
+                    _spritRenderer.flipX = true;
+                }
+            } else if (_detectionArea.detectedObjs.Count == 0)
             {
-                _spritRenderer.flipX = true;
-            }
-        } else if (_detectionArea.detectedObjs.Count == 0)
-        {
-            _brigadeiroAnimator.SetBool("isMoving", false);
+                _brigadeiroAnimator.SetBool("isMoving", false);
+            }    
         }
     }
 
@@ -69,6 +73,8 @@ public class BrigadeiroController : MonoBehaviour
     }
 
     public void Defeated(){
-        Destroy(gameObject);
+        _brigadeiroAnimator.SetTrigger("death");
+        isDead = true;
+        // Destroy(gameObject);
     }
 }

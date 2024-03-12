@@ -6,9 +6,11 @@ public class BeijinhoController : MonoBehaviour
 {
 
     public float _moveSpeedBeijinho = 3.5f;
+    private bool isDead = false;
     private Vector2 _beijinhoDirection;
     private Rigidbody2D _beijinhoRB2D;
     private Animator _beijinhoAnimator;
+    public float health = 1;
 
     public DetectionController _detectionArea;
 
@@ -50,5 +52,25 @@ public class BeijinhoController : MonoBehaviour
         {
             _beijinhoAnimator.SetBool("isMoving", false);
         }
+    }
+
+    public float Health {
+        set {
+            health = value;
+            if (health <= 0)
+            {
+                Defeated();
+            }        
+        }
+        get {
+            return health;
+        }
+
+    }
+
+    public void Defeated(){
+        _beijinhoAnimator.SetTrigger("death");
+        isDead = true;
+        // Destroy(gameObject);
     }
 }
