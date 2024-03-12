@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour
         {
             // Debug.Log("O jogador morreu!");
             _playerAnimator.SetTrigger("isDead");
+            // Thread.Sleep(10000);
+            // SceneManager.LoadScene("Menu");
         }
     }
 
