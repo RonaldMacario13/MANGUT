@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private float _playerCurrentLives;
     private bool _isPlayerDead = false;
     private bool _isAttacking = false;
-
+    private SpriteRenderer _spritRenderer;
 
     [SerializeField] Image vidaOn;
     [SerializeField] Image vidaOn2;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
         _playerCurrentLives = _playerInitialLives;
 
         _playerAnimator = GetComponent<Animator>();
+
+        _spritRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update() 
@@ -59,21 +62,13 @@ public class PlayerController : MonoBehaviour
         if(_isAttacking){
             _playerAnimator.SetTrigger("attack");
         }
-        //  else {
-        //     _playerAnimator.SetInteger("Movimento", 0);
-        // }
 
         Flip();
-        // _playerInitialLives = Mathf.Clamp(_playerInitialLives, 0, 3);
-        // Debug.Log(_playerCurrentLives);
     }
 
     void FixedUpdate() 
     {   
-        // if (_playerDirection != Vector2.zero)
-        // {
-        //     _playerAnimator.SetBool("isMoving", true);
-        // }
+
         if (!_isPlayerDead)
         { 
         _playerRigidbody2D.MovePosition(_playerRigidbody2D.position + _playerDirection.normalized * _playerSpeed * Time.fixedDeltaTime);
@@ -81,14 +76,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag == "Enemy") {
-            PlayerTakeDamage(1.0f);
+
+        if(other.gameObject.tag == "EnemyBrigadeiro") {
+            BrigadeiroController brigadeiro = other.gameObject.GetComponent<BrigadeiroController>();
+            if (brigadeiro.health > 0)
+            {
+                PlayerTakeDamage(1.0f);
+            }
+        }
+        if(other.gameObject.tag == "EnemyBeijinho") {
+            BeijinhoController beijinho = other.gameObject.GetComponent<BeijinhoController>();
+            if (beijinho.health > 0)
+            {
+                PlayerTakeDamage(1.0f);
+            }
         }
     }
 
     void PlayerRun()
     {
-        // Debug.Log("Entrou na parada de correr");
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             _playerSpeed = _playerRunSpeed;
@@ -128,7 +134,6 @@ public class PlayerController : MonoBehaviour
         if (_playerCurrentLives <= 0)
         {
             _isPlayerDead = true;
-            // Debug.Log("O jogador morreu!");
             Dead();
         }
     }
@@ -136,9 +141,7 @@ public class PlayerController : MonoBehaviour
     void Dead() {
         if (_isPlayerDead)
         {
-            // Debug.Log("O jogador morreu!");
             _playerAnimator.SetTrigger("isDead");
-            // Thread.Sleep(10000);
             // SceneManager.LoadScene("Menu");
         }
     }
@@ -156,23 +159,28 @@ public class PlayerController : MonoBehaviour
             _isAttacking = false;
             _playerSpeed = _playerInitialSpeed;
         }
+    }
 
-        if (_playerDirection.x > 0)
-        {
-            swordAttack.AttackRight();
-        } else if(_playerDirection.x < 0)
+    public void SwordAttack() {
+        if (_spritRenderer.flipX == true)
         {
             swordAttack.AttackLeft();
+        } else {
+            swordAttack.AttackRight();
         }
+    }
+
+    public void EndSwordAttack() {
+        swordAttack.StopAttack();
     }
 
     void Flip() {
         if (_playerDirection.x > 0)
         {
-            transform.eulerAngles = new Vector2(0f, 0f);
+            _spritRenderer.flipX = false;
         } else if(_playerDirection.x < 0)
         {
-            transform.eulerAngles = new Vector2(0f, 180f);
+            _spritRenderer.flipX = true;
         }
     }
 }

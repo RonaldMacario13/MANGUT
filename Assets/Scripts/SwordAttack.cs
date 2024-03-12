@@ -4,32 +4,26 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    Vector2 leftAttackOffset;
-    Collider2D swordCollider;
 
-    public float damage = 3;
+    Vector2 rightAttackOffset;
+    public Collider2D swordCollider;
+
+    public float damage = 1;
 
     // Start is called before the first frame update
     private void Start()
     {
-        swordCollider = GetComponent<Collider2D>();
-    }
-
-    private void update() {
-        leftAttackOffset = transform.position;
-
+        rightAttackOffset = transform.localPosition;
     }
 
     public void AttackRight() {
         swordCollider.enabled = true;
-        transform.position = new Vector3(leftAttackOffset.x * (-1), leftAttackOffset.y, 0f);
-        Debug.Log("atacando direita!");
+        transform.localPosition = rightAttackOffset;
     }
 
     public void AttackLeft() {
         swordCollider.enabled = true;
-        transform.position = leftAttackOffset;
-        Debug.Log("atacando esquerda!");
+        transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
     }
 
     public void StopAttack() {
@@ -37,11 +31,17 @@ public class SwordAttack : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        BrigadeiroController brigadeiro = other.GetComponent<BrigadeiroController>();
 
-        if (other.tag == "Enemy")
+        if (other.tag == "EnemyBrigadeiro")
         {
+            BrigadeiroController brigadeiro = other.GetComponent<BrigadeiroController>();
             brigadeiro.Health -= damage;
+        }
+        
+        if (other.tag == "EnemyBeijinho")
+        {
+            BeijinhoController beijinho = other.GetComponent<BeijinhoController>();
+            beijinho.Health -= damage;
         }
     }
 }
