@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool _isPlayerDead = false;
     private bool _isAttacking = false;
     private SpriteRenderer _spritRenderer;
+    FoodController _foodController;
 
     [SerializeField] Image vidaOn;
     [SerializeField] Image vidaOn2;
@@ -91,6 +92,12 @@ public class PlayerController : MonoBehaviour
                 PlayerTakeDamage(1.0f);
             }
         }
+        if(other.gameObject.tag == "Food") {
+            RecoverLife(1.0f);
+            FoodController food = other.gameObject.GetComponent<FoodController>();
+            food.DestroyFood();
+        }
+
     }
 
     void PlayerRun()
@@ -110,6 +117,16 @@ public class PlayerController : MonoBehaviour
     {
         _playerCurrentLives -= damage;
 
+        VerifyLife();
+
+        if (_playerCurrentLives <= 0)
+        {
+            _isPlayerDead = true;
+            Dead();
+        }
+    }
+
+    void VerifyLife() {
         if (_playerCurrentLives == 2.0f)
         {
             vidaOn2.enabled = true;
@@ -130,11 +147,13 @@ public class PlayerController : MonoBehaviour
             vidaOn.enabled = false;
             vidaOff.enabled = true;
         }
+    }
 
-        if (_playerCurrentLives <= 0)
+    void RecoverLife(float life) {
+        if (_playerCurrentLives < 3)
         {
-            _isPlayerDead = true;
-            Dead();
+            _playerCurrentLives += life;
+            VerifyLife();
         }
     }
 
