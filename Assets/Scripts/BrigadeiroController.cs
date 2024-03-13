@@ -6,7 +6,7 @@ public class BrigadeiroController : MonoBehaviour
 {
 
     public float _moveSpeedBrigadeiro = 3.5f;
-        private bool isDead = false;
+    private bool isDead = false;
     private Vector2 _brigadeiroDirection;
     private Rigidbody2D _brigadeiroRB2D;
     private Animator _brigadeiroAnimator;

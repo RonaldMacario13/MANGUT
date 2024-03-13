@@ -32,25 +32,29 @@ public class BeijinhoController : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if (_detectionArea.detectedObjs.Count > 0)
+        if (!isDead)
         {
-            _beijinhoAnimator.SetBool("isMoving", true);
-
-            _beijinhoDirection = (_detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
-
-            _beijinhoRB2D.MovePosition(_beijinhoRB2D.position + _beijinhoDirection * _moveSpeedBeijinho * Time.fixedDeltaTime);
-
-            if (_beijinhoDirection.x > 0)
+            if (_detectionArea.detectedObjs.Count > 0)
             {
-                _spritRenderer.flipX = false;
-            }
-            else if (_beijinhoDirection.x < 0)
+                _beijinhoAnimator.SetBool("isMoving", true);
+
+                _beijinhoDirection = (_detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
+
+                _beijinhoRB2D.MovePosition(_beijinhoRB2D.position + _beijinhoDirection * _moveSpeedBeijinho * Time.fixedDeltaTime);
+
+                if (_beijinhoDirection.x > 0)
+                {
+                    _spritRenderer.flipX = false;
+                }
+                else if (_beijinhoDirection.x < 0)
+                {
+                    _spritRenderer.flipX = true;
+                }
+            } else if (_detectionArea.detectedObjs.Count == 0)
             {
-                _spritRenderer.flipX = true;
+                _beijinhoAnimator.SetBool("isMoving", false);
             }
-        } else if (_detectionArea.detectedObjs.Count == 0)
-        {
-            _beijinhoAnimator.SetBool("isMoving", false);
+            
         }
     }
 
