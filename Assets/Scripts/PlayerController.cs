@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float _playerCurrentLives;
     private bool _isPlayerDead = false;
     private bool _isAttacking = false;
+    private bool _isWide = false;
     private SpriteRenderer _spritRenderer;
     FoodController _foodController;
 
@@ -64,6 +65,12 @@ public class PlayerController : MonoBehaviour
             _playerAnimator.SetTrigger("attack");
         }
 
+        if(_isWide) {
+            _playerAnimator.SetBool("isWide", true);
+        } else {
+            _playerAnimator.SetBool("isWide", false);
+        }
+
         Flip();
     }
 
@@ -74,6 +81,8 @@ public class PlayerController : MonoBehaviour
         { 
         _playerRigidbody2D.MovePosition(_playerRigidbody2D.position + _playerDirection.normalized * _playerSpeed * Time.fixedDeltaTime);
         }
+
+        // print("DISPARO DE IS WIDE: " + _isWide);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -127,6 +136,14 @@ public class PlayerController : MonoBehaviour
     }
 
     void VerifyLife() {
+        // print("TA LARGO: " + _isWide);
+
+        if (_playerCurrentLives < 3) {
+            _isWide = true;
+        } else if (_playerCurrentLives > 2) {
+            _isWide = false;
+        }
+
         if (_playerCurrentLives == 2.0f)
         {
             vidaOn2.enabled = true;
