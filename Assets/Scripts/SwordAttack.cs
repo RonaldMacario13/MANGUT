@@ -43,9 +43,5 @@ public class SwordAttack : MonoBehaviour
             BeijinhoController beijinho = other.GetComponent<BeijinhoController>();
             beijinho.Health -= damage;
         }
-        // if(other.gameObject.tag == "Food") {
-        //     FoodController food = other.gameObject.GetComponent<FoodController>();
-        //     food.DestroyFood();
-        // }
     }
 }

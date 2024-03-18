@@ -67,8 +67,10 @@ public class PlayerController : MonoBehaviour
 
         if(_isWide) {
             _playerAnimator.SetBool("isWide", true);
+            _playerSpeed = 4;
         } else {
             _playerAnimator.SetBool("isWide", false);
+            _playerSpeed = 6;
         }
 
         Flip();
@@ -81,8 +83,6 @@ public class PlayerController : MonoBehaviour
         { 
         _playerRigidbody2D.MovePosition(_playerRigidbody2D.position + _playerDirection.normalized * _playerSpeed * Time.fixedDeltaTime);
         }
-
-        // print("DISPARO DE IS WIDE: " + _isWide);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -136,7 +136,6 @@ public class PlayerController : MonoBehaviour
     }
 
     void VerifyLife() {
-        // print("TA LARGO: " + _isWide);
 
         if (_playerCurrentLives < 3) {
             _isWide = true;

@@ -75,6 +75,5 @@ public class BrigadeiroController : MonoBehaviour
     public void Defeated(){
         _brigadeiroAnimator.SetTrigger("death");
         isDead = true;
-        // Destroy(gameObject);
     }
 }
