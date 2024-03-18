@@ -8,6 +8,7 @@ public class BrigadeiroController : MonoBehaviour
     public float _moveSpeedBrigadeiro = 3.5f;
     private bool isDead = false;
     private Vector2 _brigadeiroDirection;
+    private CapsuleCollider2D brigadeiroBoxCollider;
     private Rigidbody2D _brigadeiroRB2D;
     private Animator _brigadeiroAnimator;
 
@@ -23,6 +24,7 @@ public class BrigadeiroController : MonoBehaviour
         _brigadeiroRB2D = GetComponent<Rigidbody2D>();
         _spritRenderer = GetComponent<SpriteRenderer>();
         _brigadeiroAnimator = GetComponent<Animator>();
+        brigadeiroBoxCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -75,5 +77,6 @@ public class BrigadeiroController : MonoBehaviour
     public void Defeated(){
         _brigadeiroAnimator.SetTrigger("death");
         isDead = true;
+        brigadeiroBoxCollider.enabled = false;
     }
 }

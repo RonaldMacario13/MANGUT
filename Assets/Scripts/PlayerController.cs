@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     public SwordAttack swordAttack;
 
+    private BoxCollider2D playerBoxCollider;
+
     private Rigidbody2D _playerRigidbody2D;
     [SerializeField]
     private float _playerSpeed;
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _spritRenderer = GetComponent<SpriteRenderer>();
+
+        playerBoxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update() 
@@ -68,9 +72,11 @@ public class PlayerController : MonoBehaviour
         if(_isWide) {
             _playerAnimator.SetBool("isWide", true);
             _playerSpeed = 4;
+            swordAttack.damage = 0.5f;
         } else {
             _playerAnimator.SetBool("isWide", false);
             _playerSpeed = 6;
+            swordAttack.damage = 1f;
         }
 
         Flip();
@@ -177,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if (_isPlayerDead)
         {
             _playerAnimator.SetTrigger("isDead");
+            playerBoxCollider.enabled = false;
             // SceneManager.LoadScene("Menu");
         }
     }
