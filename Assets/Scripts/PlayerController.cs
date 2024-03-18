@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     public SwordAttack swordAttack;
 
+    private BoxCollider2D playerBoxCollider;
+
     private Rigidbody2D _playerRigidbody2D;
     [SerializeField]
     private float _playerSpeed;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float _playerCurrentLives;
     private bool _isPlayerDead = false;
     private bool _isAttacking = false;
+    private bool _isWide = false;
     private SpriteRenderer _spritRenderer;
     FoodController _foodController;
 
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _spritRenderer = GetComponent<SpriteRenderer>();
+
+        playerBoxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update() 
@@ -62,6 +67,16 @@ public class PlayerController : MonoBehaviour
 
         if(_isAttacking){
             _playerAnimator.SetTrigger("attack");
+        }
+
+        if(_isWide) {
+            _playerAnimator.SetBool("isWide", true);
+            _playerSpeed = 4;
+            swordAttack.damage = 0.5f;
+        } else {
+            _playerAnimator.SetBool("isWide", false);
+            _playerSpeed = 6;
+            swordAttack.damage = 1f;
         }
 
         Flip();
@@ -127,6 +142,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void VerifyLife() {
+
+        if (_playerCurrentLives < 3) {
+            _isWide = true;
+        } else if (_playerCurrentLives > 2) {
+            _isWide = false;
+        }
+
         if (_playerCurrentLives == 2.0f)
         {
             vidaOn2.enabled = true;
@@ -161,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if (_isPlayerDead)
         {
             _playerAnimator.SetTrigger("isDead");
+            playerBoxCollider.enabled = false;
             // SceneManager.LoadScene("Menu");
         }
     }

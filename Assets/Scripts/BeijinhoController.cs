@@ -8,6 +8,7 @@ public class BeijinhoController : MonoBehaviour
     public float _moveSpeedBeijinho = 3.5f;
     private bool isDead = false;
     private Vector2 _beijinhoDirection;
+    private CapsuleCollider2D beijinhoBoxCollider;
     private Rigidbody2D _beijinhoRB2D;
     private Animator _beijinhoAnimator;
     public float health = 1;
@@ -22,6 +23,7 @@ public class BeijinhoController : MonoBehaviour
         _beijinhoRB2D = GetComponent<Rigidbody2D>();
         _spritRenderer = GetComponent<SpriteRenderer>();
         _beijinhoAnimator = GetComponent<Animator>();
+        beijinhoBoxCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -75,6 +77,7 @@ public class BeijinhoController : MonoBehaviour
     public void Defeated(){
         _beijinhoAnimator.SetTrigger("death");
         isDead = true;
+        beijinhoBoxCollider.enabled = false;
         // Destroy(gameObject);
     }
 }
