@@ -43,5 +43,10 @@ public class SwordAttack : MonoBehaviour
             BeijinhoController beijinho = other.GetComponent<BeijinhoController>();
             beijinho.Health -= damage;
         }
+        if (other.tag == "EnemyCoxinha")
+        {
+            CoxinhaController coxinha = other.GetComponent<CoxinhaController>();
+            coxinha.Health -= damage;
+        }
     }
 }
