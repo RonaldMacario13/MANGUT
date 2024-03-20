@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Image vidaOn2;
     [SerializeField] Image vidaOff;
     [SerializeField] Image vidaOff2;
+    [SerializeField] Image vidaOff3;
 
     void Start() 
     {
@@ -107,6 +108,13 @@ public class PlayerController : MonoBehaviour
                 PlayerTakeDamage(1.0f);
             }
         }
+        if(other.gameObject.tag == "EnemyCoxinha") {
+            CoxinhaController coxinha = other.gameObject.GetComponent<CoxinhaController>();
+            if (coxinha.health > 0)
+            {
+                PlayerTakeDamage(1f);
+            }
+        }
         if(other.gameObject.tag == "Food") {
             RecoverLife(1.0f);
             FoodController food = other.gameObject.GetComponent<FoodController>();
@@ -137,7 +145,12 @@ public class PlayerController : MonoBehaviour
         if (_playerCurrentLives <= 0)
         {
             _isPlayerDead = true;
+
             Dead();
+
+            // vidaOff.enabled = false;
+            // vidaOff2.enabled = false;
+            // vidaOff3.enabled = false;
         }
     }
 
@@ -149,7 +162,7 @@ public class PlayerController : MonoBehaviour
             _isWide = false;
         }
 
-        if (_playerCurrentLives == 2.0f)
+        if (_playerCurrentLives < 3.0f && _playerCurrentLives >= 2.0f)
         {
             vidaOn2.enabled = true;
             vidaOff2.enabled = false;
@@ -158,7 +171,7 @@ public class PlayerController : MonoBehaviour
             vidaOff2.enabled = true;
         }
 
-        if (_playerCurrentLives == 1.0f)
+        if (_playerCurrentLives < 2.0f && _playerCurrentLives > 0f)
         {
             vidaOn2.enabled = true;
             vidaOff2.enabled = false;
