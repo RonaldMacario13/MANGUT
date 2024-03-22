@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BeijinhoController : MonoBehaviour
+public class BeijinhoController : MonoBehaviour 
 {
 
     public float _moveSpeedBeijinho = 3.5f;
@@ -12,7 +13,8 @@ public class BeijinhoController : MonoBehaviour
     private Rigidbody2D _beijinhoRB2D;
     private Animator _beijinhoAnimator;
     public float health = 1;
-
+    public TextComponent textComponent;
+    public GameObject canva;
     public DetectionController _detectionArea;
 
     private SpriteRenderer _spritRenderer;
@@ -44,6 +46,8 @@ public class BeijinhoController : MonoBehaviour
 
                 _beijinhoRB2D.MovePosition(_beijinhoRB2D.position + _beijinhoDirection * _moveSpeedBeijinho * Time.fixedDeltaTime);
 
+                canva.SetActive(true);
+
                 if (_beijinhoDirection.x > 0)
                 {
                     _spritRenderer.flipX = false;
@@ -55,8 +59,10 @@ public class BeijinhoController : MonoBehaviour
             } else if (_detectionArea.detectedObjs.Count == 0)
             {
                 _beijinhoAnimator.SetBool("isMoving", false);
+
+                canva.SetActive(false);
             }
-            
+
         }
     }
 

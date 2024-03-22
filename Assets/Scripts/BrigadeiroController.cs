@@ -5,7 +5,7 @@ using UnityEngine;
 public class BrigadeiroController : MonoBehaviour
 {
 
-    public float _moveSpeedBrigadeiro = 3.5f;
+    public float _moveSpeedBrigadeiro = 3.5f;   
     private bool isDead = false;
     private Vector2 _brigadeiroDirection;
     private CapsuleCollider2D brigadeiroBoxCollider;
@@ -17,6 +17,8 @@ public class BrigadeiroController : MonoBehaviour
     public DetectionController _detectionArea;
 
     private SpriteRenderer _spritRenderer;
+
+    public GameObject canva;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,8 @@ public class BrigadeiroController : MonoBehaviour
 
                 _brigadeiroRB2D.MovePosition(_brigadeiroRB2D.position + _brigadeiroDirection * _moveSpeedBrigadeiro * Time.fixedDeltaTime);
 
+                canva.SetActive(true);
+
                 if (_brigadeiroDirection.x > 0)
                 {
                     _spritRenderer.flipX = false;
@@ -56,6 +60,9 @@ public class BrigadeiroController : MonoBehaviour
             } else if (_detectionArea.detectedObjs.Count == 0)
             {
                 _brigadeiroAnimator.SetBool("isMoving", false);
+
+                canva.SetActive(false);
+              //  _nutritionDialog.HideDialog();
             }    
         }
     }

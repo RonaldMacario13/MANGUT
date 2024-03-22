@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private bool _isWide = false;
     private SpriteRenderer _spritRenderer;
     FoodController _foodController;
-
     [SerializeField] Image vidaOn;
     [SerializeField] Image vidaOn2;
     [SerializeField] Image vidaOff;
