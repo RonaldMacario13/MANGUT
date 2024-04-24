@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   moveSpeedEnemy: 3.5
+  AnimatorController: {fileID: 9100000, guid: 19a59bfeea814304a9817e4af2ea93df, type: 2}
