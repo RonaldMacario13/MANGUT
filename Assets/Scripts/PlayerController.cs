@@ -1,8 +1,4 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -94,33 +90,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
 
-        if(other.gameObject.tag == "EnemyBrigadeiro") {
-            BrigadeiroController brigadeiro = other.gameObject.GetComponent<BrigadeiroController>();
-            if (brigadeiro.health > 0)
+        if(other.gameObject.tag == "Enemy") {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy.health > 0)
             {
                 PlayerTakeDamage(1.0f);
             }
         }
-        if(other.gameObject.tag == "EnemyBeijinho") {
-            BeijinhoController beijinho = other.gameObject.GetComponent<BeijinhoController>();
-            if (beijinho.health > 0)
-            {
-                PlayerTakeDamage(1.0f);
-            }
-        }
-        if(other.gameObject.tag == "EnemyCoxinha") {
-            CoxinhaController coxinha = other.gameObject.GetComponent<CoxinhaController>();
-            if (coxinha.health > 0)
-            {
-                PlayerTakeDamage(1f);
-            }
-        }
-        if(other.gameObject.tag == "Food") {
+        if(other.gameObject.CompareTag("Food")) {
             RecoverLife(1.0f);
             FoodController food = other.gameObject.GetComponent<FoodController>();
             food.DestroyFood();
         }
-
     }
 
     void PlayerRun()

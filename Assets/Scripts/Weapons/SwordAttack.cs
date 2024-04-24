@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-
     Vector2 rightAttackOffset;
     public Collider2D swordCollider;
 
@@ -31,22 +28,10 @@ public class SwordAttack : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-
-        if (other.tag == "EnemyBrigadeiro")
+        if (other.CompareTag("Enemy"))
         {
-            BrigadeiroController brigadeiro = other.GetComponent<BrigadeiroController>();
-            brigadeiro.Health -= damage;
-        }
-        
-        if (other.tag == "EnemyBeijinho")
-        {
-            BeijinhoController beijinho = other.GetComponent<BeijinhoController>();
-            beijinho.Health -= damage;
-        }
-        if (other.tag == "EnemyCoxinha")
-        {
-            CoxinhaController coxinha = other.GetComponent<CoxinhaController>();
-            coxinha.Health -= damage;
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.Health -= damage;
         }
     }
 }
