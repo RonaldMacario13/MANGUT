@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
         enemyBoxCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyAnimator = GetComponent<Animator>();
+        enemyAnimator.runtimeAnimatorController = enemyData.AnimatorController;
     }
 
     private void FixedUpdate() 
