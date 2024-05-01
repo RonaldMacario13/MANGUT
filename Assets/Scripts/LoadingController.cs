@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public Image image;
     public Text loadingText;
 
     readonly List<string> loadingPhrases = new()
@@ -27,5 +27,11 @@ public class SceneLoader : MonoBehaviour
         int rand = Random.Range(0, loadingPhrases.Count-1);
 
         loadingText.text = loadingPhrases[rand];
+            
+        Invoke(nameof(ChangeScene), 8f);
+    }
+
+    void ChangeScene() {
+        SceneManager.LoadSceneAsync(2);
     }
 }
