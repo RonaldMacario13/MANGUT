@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private string levelName;
+    [SerializeField] private string newGameScene;
+    [SerializeField] private string continueScene;
     //private GameObject menuPanel;
 
     public void PlayNewGame() {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(newGameScene);
     }
 
     public void Continue() {
-        print("TODO CONTINUE GAME");
+        SceneManager.LoadScene(continueScene);
     }
 
     public void Credits() {

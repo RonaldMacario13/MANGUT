@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ContinueMenuManager : MonoBehaviour
 {
-    [SerializeField] private string levelName;
+    [SerializeField] private string playGameScene;
+    [SerializeField] private string menuScene;
 
     public void PlayGame() {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(playGameScene);
     }
 
     public void Back() {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(menuScene);
     }
 }

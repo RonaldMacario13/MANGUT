@@ -506,7 +506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7110d603a8778b748af43ddc603bffa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Loading
+  playGameScene: Loading
+  menuScene: Menu
 --- !u!1 &1092754974
 GameObject:
   m_ObjectHideFlags: 0
