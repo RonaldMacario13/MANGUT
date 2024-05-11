@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 11778242}
   - component: {fileID: 11778241}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: ExitText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 69777664}
   - component: {fileID: 69777663}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ContinueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 1121906844}
   - component: {fileID: 1121906843}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: MonsterSheetText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1294,7 +1294,7 @@ GameObject:
   - component: {fileID: 1588230450}
   - component: {fileID: 1588230449}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: CreditsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 2000834793}
   - component: {fileID: 2000834792}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: NewGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
