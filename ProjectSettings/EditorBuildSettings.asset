@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_1.unity
     guid: a4f5141eb94be2b4f85444a41abcc9e9
+  - enabled: 1
+    path: Assets/Scenes/Continue.unity
+    guid: 794c14960f6d14e4cbb3a9a74abb43e6
+  - enabled: 1
+    path: Assets/Scenes/GameCredits.unity
+    guid: 426deb0bf356f8d4eb8ba5d93c4af704
+  - enabled: 1
+    path: Assets/Scenes/MonsterSheet.unity
+    guid: db3f63c856006594db12da1a7fc9df29
   m_configObjects: {}
