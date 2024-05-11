@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private string newGameScene;
     [SerializeField] private string continueScene;
+    [SerializeField] private string creditsScene;
     //private GameObject menuPanel;
 
     public void PlayNewGame() {
@@ -18,7 +19,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Credits() {
-        print("TODO GAME CREDITS");
+        SceneManager.LoadScene(creditsScene);
     }
 
     public void MonsterSheets() {

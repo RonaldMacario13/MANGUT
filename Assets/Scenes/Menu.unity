@@ -780,6 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newGameScene: Loading
   continueScene: Continue
+  creditsScene: GameCredits
 --- !u!4 &1035986431
 Transform:
   m_ObjectHideFlags: 0
