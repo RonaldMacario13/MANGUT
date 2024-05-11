@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string newGameScene;
     [SerializeField] private string continueScene;
     [SerializeField] private string creditsScene;
+    [SerializeField] private string monsterSheetScene;
     //private GameObject menuPanel;
 
     public void PlayNewGame() {
@@ -23,7 +24,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void MonsterSheets() {
-        print("TODO MONSTERSHEET");
+        SceneManager.LoadScene(monsterSheetScene);
     }
 
     public void Exit() {

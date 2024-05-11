@@ -781,6 +781,7 @@ MonoBehaviour:
   newGameScene: Loading
   continueScene: Continue
   creditsScene: GameCredits
+  monsterSheetScene: MonsterSheet
 --- !u!4 &1035986431
 Transform:
   m_ObjectHideFlags: 0
