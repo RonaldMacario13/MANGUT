@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: bc5ca4b7deba473429aa92738b7fd6d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Loading.unity
     guid: bc5ca4b7deba473429aa92738b7fd6d2
   - enabled: 1
@@ -19,9 +19,24 @@ EditorBuildSettings:
     guid: a4f5141eb94be2b4f85444a41abcc9e9
   - enabled: 1
     path: Assets/Scenes/Level_2.unity
-    guid: 1889c26aed081d347aad25a0cc6d9d59
+    guid: 5eb5ee3c4f075ad4ebd62d044c894362
   - enabled: 1
     path: Assets/Scenes/Level_3.unity
+    guid: 7e4b6ffa1e099634a8b4ad6c84daaba4
+  - enabled: 1
+    path: Assets/Scenes/GameCredits.unity
+    guid: 426deb0bf356f8d4eb8ba5d93c4af704
+  - enabled: 1
+    path: Assets/Scenes/MonsterSheet.unity
+    guid: db3f63c856006594db12da1a7fc9df29
+  - enabled: 1
+    path: Assets/Scenes/Continue.unity
+    guid: 794c14960f6d14e4cbb3a9a74abb43e6
+  - enabled: 0
+    path: Assets/Scenes/Test2.unity
+    guid: 1889c26aed081d347aad25a0cc6d9d59
+  - enabled: 0
+    path: Assets/Scenes/Test3.unity
     guid: 6018f3fa268fbbc4bb5c6a001f1d89ec
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity

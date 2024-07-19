@@ -1080,7 +1080,6 @@ MonoBehaviour:
   continueScene: Continue
   creditsScene: GameCredits
   monsterSheetScene: MonsterSheet
-  levelName: Level_1
 --- !u!4 &1035986431
 Transform:
   m_ObjectHideFlags: 0
