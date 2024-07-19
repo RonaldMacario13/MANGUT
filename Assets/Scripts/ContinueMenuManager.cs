@@ -9,10 +9,15 @@ public class ContinueMenuManager : MonoBehaviour
     [SerializeField] private string menuScene;
 
     public void PlayGame() {
-        SceneManager.LoadScene(playGameScene);
+        StartCoroutine(WaitAndChangeScene(playGameScene, 0.7f));
     }
 
     public void Back() {
-        SceneManager.LoadScene(menuScene);
+        StartCoroutine(WaitAndChangeScene(menuScene, 0.7f));
+    }
+
+    private IEnumerator WaitAndChangeScene(string scene, float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(scene);
     }
 }

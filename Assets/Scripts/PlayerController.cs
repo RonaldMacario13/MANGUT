@@ -27,12 +27,16 @@ public class PlayerController : MonoBehaviour
 
     public Text fatRateText;
     public Text deathText;
+    public AudioSource audioSourceStep;
+    public AudioSource audioSourceSword;
 
     private bool _isPlayerDead = false;
     private bool _isAttacking = false;
     private bool _isWide = false;
     private SpriteRenderer _spritRenderer;
     FoodController _foodController;
+    public float stepInterval = 0.05f;
+    private float nextStepTime = 0f;
 
     [SerializeField] Image vidaOn;
     [SerializeField] Image vidaOn2;
@@ -67,12 +71,19 @@ public class PlayerController : MonoBehaviour
 
         if (_playerDirection.sqrMagnitude > 0)
         {
-            _playerAnimator.SetBool("isMoving", true);
+            _playerAnimator.SetBool("isMoving", true); 
+            if (Time.time >= nextStepTime)
+            {
+                audioSourceStep.Play();
+                nextStepTime = Time.time + stepInterval;
+            }
         } else {
             _playerAnimator.SetBool("isMoving", false);
+            audioSourceStep.Stop();
         }
 
         if(_isAttacking){
+            audioSourceSword.Play();
             _playerAnimator.SetTrigger("attack");
         }
 
@@ -123,11 +134,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            print("To CORRENDO");
             _playerSpeed = _playerRunSpeed;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            print("To andando");
             _playerSpeed = _playerInitialSpeed;
         }
     }

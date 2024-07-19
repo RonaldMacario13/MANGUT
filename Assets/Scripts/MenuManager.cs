@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,22 +13,27 @@ public class MenuManager : MonoBehaviour
     //private GameObject menuPanel;
 
     public void PlayNewGame() {
-        SceneManager.LoadScene(newGameScene);
+        StartCoroutine(WaitAndChangeScene(newGameScene, 0.7f));
     }
 
     public void Continue() {
-        SceneManager.LoadScene(continueScene);
+        StartCoroutine(WaitAndChangeScene(continueScene, 0.7f));
     }
 
     public void Credits() {
-        SceneManager.LoadScene(creditsScene);
+        StartCoroutine(WaitAndChangeScene(creditsScene, 0.7f));
     }
 
     public void MonsterSheets() {
-        SceneManager.LoadScene(monsterSheetScene);
+        StartCoroutine(WaitAndChangeScene(monsterSheetScene, 0.7f));
     }
 
     public void Exit() {
         Application.Quit();
+    }
+    
+    private IEnumerator WaitAndChangeScene(string scene, float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(scene);
     }
 }

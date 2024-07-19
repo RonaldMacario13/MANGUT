@@ -8,6 +8,11 @@ public class CreditsMenuManager : MonoBehaviour
     [SerializeField] private string menuScene;
     
     public void Back() {
-        SceneManager.LoadScene(menuScene);
+        StartCoroutine(WaitAndChangeScene(menuScene, 0.7f));
+    }
+
+    private IEnumerator WaitAndChangeScene(string scene, float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(scene);
     }
 }
