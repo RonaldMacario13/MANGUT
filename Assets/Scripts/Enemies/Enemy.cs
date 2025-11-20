@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator enemyAnimator;
 
+    public GameObject enemyText;
+
     void Start()
     {
         health = enemyData.health;
@@ -43,6 +45,12 @@ public class Enemy : MonoBehaviour
     {
         if (detectionArea.detectedObjs.Count > 0)
             {
+
+                if (enemyText)
+                {
+                    enemyText.SetActive(true);
+                }
+
                 enemyAnimator.SetBool("isMoving", true);
 
                 enemyDirection = (detectionArea.detectedObjs[0].transform.position - transform.position).normalized;
@@ -60,6 +68,11 @@ public class Enemy : MonoBehaviour
             } else if (detectionArea.detectedObjs.Count == 0)
             {
                 enemyAnimator.SetBool("isMoving", false);
+
+                if (enemyText)
+                {
+                    enemyText.SetActive(false);
+                }
             }
     }
 
@@ -79,6 +92,12 @@ public class Enemy : MonoBehaviour
     public void Defeated(){
         enemyAnimator.SetTrigger("death");
         isDead = true;
+
+        if (enemyText)
+        {
+            enemyText.SetActive(false);
+        }
+
         enemyBoxCollider.enabled = false;
     }
 }

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     // private float _playerCurrentLives;
 
     public Text fatRateText;
-    public Text deathText;
+    public GameObject deathScreen;
     public AudioSource audioSourceStep;
     public AudioSource audioSourceSword;
 
@@ -67,7 +67,14 @@ public class PlayerController : MonoBehaviour
 
         OnAttack();
 
-
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "SampleScene")
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
 
         if (_playerDirection.sqrMagnitude > 0)
         {
@@ -123,11 +130,6 @@ public class PlayerController : MonoBehaviour
                 PlayerIncreaseFatRate(10f);
             }
         }
-        if(other.gameObject.CompareTag("Food")) {
-            RecoverFatRate(20f);
-            FoodController food = other.gameObject.GetComponent<FoodController>();
-            food.DestroyFood();
-        }
     }
 
     void PlayerRun()
@@ -145,50 +147,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // void PlayerTakeDamage(float damage)
-    // {
-    //     _playerCurrentLives -= damage;
-
-    //     VerifyLife();
-
-    //     if (_playerCurrentLives <= 0)
-    //     {
-    //         _isPlayerDead = true;
-
-    //         Dead();
-
-    //         // vidaOff.enabled = false;
-    //         // vidaOff2.enabled = false;
-    //         // vidaOff3.enabled = false;
-    //     }
-    // }
-
-    void PlayerIncreaseFatRate(float damage)
+    public void PlayerIncreaseFatRate(float damage)
     {
         _playerCurrentFatRate += damage;
 
         VerifyLife();
-
-        // if (_playerCurrentLives <= 0)
-        // {
-        //     _isPlayerDead = true;
-
-        //     Dead();
-
-        //     // vidaOff.enabled = false;
-        //     // vidaOff2.enabled = false;
-        //     // vidaOff3.enabled = false;
-        // }
 
         if (_playerCurrentFatRate > 99)
         {
             _isPlayerDead = true;
 
             Dead();
-
-            // vidaOff.enabled = false;
-            // vidaOff2.enabled = false;
-            // vidaOff3.enabled = false;
         }
     }
 
@@ -239,7 +208,7 @@ public class PlayerController : MonoBehaviour
     //     }
     // }
 
-    void RecoverFatRate(float life) {
+    public void RecoverFatRate(float life) {
         if (_playerCurrentFatRate > 0)
         {
             _playerCurrentFatRate -= life;
@@ -256,16 +225,16 @@ public class PlayerController : MonoBehaviour
         IEnumerator activeDeathText()
         {
             yield return new WaitForSeconds(2f);
-            deathText.enabled = true;
+            deathScreen.SetActive(true);
         }
 
 
         if (_isPlayerDead)
         {
+            Debug.Log("Entrei aqui e você sabe muito bem disso");
             _playerAnimator.SetTrigger("isDead");
             playerBoxCollider.enabled = false;
             StartCoroutine(activeDeathText());
-            Invoke(nameof(ChangeSceneToMenu), 5f);
         }
     }
 

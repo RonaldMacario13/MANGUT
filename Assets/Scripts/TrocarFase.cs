@@ -16,7 +16,7 @@ public class TrocarFase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(detectionArea);
+        // Debug.Log(detectionArea);
         if(Input.GetKeyDown(KeyCode.Tab) & detectionArea.detectedObjs.Count > 0)
         {
             CarregarNovaFase();

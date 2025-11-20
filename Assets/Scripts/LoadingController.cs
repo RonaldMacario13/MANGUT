@@ -28,7 +28,7 @@ public class SceneLoader : MonoBehaviour
 
         loadingText.text = loadingPhrases[rand];
             
-        Invoke(nameof(ChangeScene), 8f);
+        Invoke(nameof(ChangeScene), 20f);
     }
 
     void ChangeScene() {
